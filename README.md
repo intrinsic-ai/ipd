@@ -21,37 +21,7 @@ Accepted at CVPR 2024!
 
 In the repo you can find the evaluation dataset as well as links to relevant cad models
 
-### Evaluation Data
-
-| Dataset ID                  | Parts                                                                                               | Background | Cameras                                                                                                                              |   |
-|-----------------------------|-----------------------------------------------------------------------------------------------------|------------|--------------------------------------------------------------------------------------------------------------------------------------|---|
-| dataset_2023-10-18_13-38-42 | ['gear1', 'u_bolt', 'pegboard_basket']                                                              | basket     | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-19_08-07-22 | ['gear2', 't_bracket', 'corner_bracket6', 'tote_basket']                                            | basket     | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-19_10-12-18 | ['square_bracket', 'single_pinch_clamp', 'corner_bracket1', 'pegboard_basket']                      | basket     | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-19_12-12-27 | ['l_bracket', 'handrail_bracket', 'corner_bracket2', 'corner_bracket3', 'tote_basket']              | basket     | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-19_14-01-44 | ['corner_bracket', 'door_roller', 'corner_bracket4', 'pegboard_basket']                             | basket     | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-20_08-55-33 | ['oblong_float', 'corner_bracket5', 'tote_basket']                                                  | basket     | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-20_10-44-46 | ['wraparound_bracket', 'hex_manifold', 'elbow_connector', 'pegboard_basket']                        | basket     | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-23_10-47-53 | ['helical_insert', 'corner_bracket0', 'tote_basket']                                                | basket     | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-23_12-35-16 | ['pipe_fitting_unthreaded', 'pull_handle', 'pegboard_basket']                                       | basket     | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-23_14-26-45 | ['access_port', 'corner_bracket5', 'tote_basket']                                                   | basket     | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-24_10-03-05 | ['strut_channel', 'load_securing_track', 'corner_bracket4', 'pegboard_basket']                      | basket     | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-24_11-51-40 | ['gear2', 'hex_manifold']                                                                           | dark shiny		 | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-24_13-54-41 | ['gear1', 'wraparound_bracket']                                                                     | dark shiny		 | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-24_15-44-07 | ['square_bracket', 'handrail_bracket']                                                              | dark shiny		 | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-25_08-08-32 | ['l_bracket', 'helical_insert', 'corner_bracket0']                                                  | dark shiny		 | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-25_10-17-15 | ['t_bracket', 'corner_bracket', 'access_port', 'corner_bracket4']                                   | dark shiny		 | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-25_12-13-25 | ['oblong_float', 'pipe_fitting_unthreaded', 'corner_bracket5']                                      | dark shiny		 | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-25_14-17-56 | ['u_bolt', 'elbow_connector', 'corner_bracket2', 'corner_bracket3']                                 | dark shiny		 | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-25_20-33-27 | ['load_securing_track', 'pull_handle', 'corner_bracket1', 'corner_bracket6']                        | dark shiny		 | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-26_10-03-42 | ['door_roller', 'single_pinch_clamp']                                                               | dark shiny		 | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-26_12-01-45 | ['gear2', 'hex_manifold', 'pull_handle']                                                            | textured   | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-26_14-01-04 | ['gear1', 'wraparound_bracket', 'corner_bracket0', 'handrail_bracket', 'corner_bracket6']           | textured   | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-26_22-07-16 | ['access_port', 'elbow_connector', 'corner_bracket1', 'helical_insert']                             | textured   | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-27_08-32-33 | ['square_bracket', 'l_bracket', 't_bracket', 'corner_bracket', 'door_roller']                       | textured   | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-27_10-55-52 | ['load_securing_track', 'corner_bracket2', 'corner_bracket3', 'corner_bracket4', 'corner_bracket5'] | textured   | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-| dataset_2023-10-27_12-59-16 | ['u_bolt', 'pipe_fitting_unthreaded', 'single_pinch_clamp', 'oblong_float']                         | textured   | [Basler-LR](https://github.com), [Basler-HR](https://github.com), [PhotoNeo](https://github.com), [Flir-Polar](https://github.com),  |   |
-
+Dataset download is available [here](Dataset.md)
 > Dataset is in BOP format
 ```bash
 dataset_id/camera/
@@ -68,15 +38,9 @@ dataset_id/camera/
 --- scene_1/ ... n
 ```
 
-### CAD Models - Preferred Method
-We have created our own scanned versions of the CAD for each part released under our CC-BY Non-Commercial License. Those are available here. 
-| Part Name | CAD Link | 
-| --------- | -------- |
-| Gear | [Link](https://github.com) |
+### Parts used
+We purchased all physical parts from McMaster-Carr's website. We give detailed purchase instructions [here](Parts.md)
 
-### CAD Models - Paper Method
-For the results in the paper we used the CAD models from mcmaster-carr's website after purchasing the part. These you may acquire yourself from them as per their license terms. 
+## License
 
-| Part Name | Part ID Number | 
-| --------- | -------- |
-| Gear | [89234015-1](https://github.com) |
+All dataset, code, and models available in this repository are given under the CC-BY NC SA license, and are intended for Non-Commercial use only. 
