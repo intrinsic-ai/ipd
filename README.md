@@ -1,3 +1,4 @@
+![alt text](assets/image.png)
 
 # Industrial Plentopic Dataset
 
