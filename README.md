@@ -41,9 +41,11 @@ CAMERA_TYPE/DATASET_NAME/
 ------------ depth/  # for Photoneo only
 --------------- 000000.png
 ```
-scene_gt.json contains the part poses in the respective camera coordinate frame. 
-scene_pose.json contains the hand eye calibration (robot base in the camera coordinate frame) and the gripper pose in robot base coordinate frame.
-For FLIR_polar we include originally captured distorted images and add the distortion parameters in scene_camera.json. Undistortion of FLIR_polar before computing AOLP and DOLP can lead to artifacts. 
+_scene_gt.json_ contains the part poses in the respective camera coordinate frame. 
+
+_scene_pose.json_ contains the hand eye calibration (robot base in the camera coordinate frame) and the gripper pose in robot base coordinate frame.
+
+For FLIR_polar we include originally captured distorted images and add the distortion parameters in _scene_camera.json_. Undistortion of FLIR_polar before computing AOLP and DOLP can lead to artifacts. 
 
 ### Parts used
 We purchased all physical parts from McMaster-Carr's website. We give detailed purchase instructions [here](Parts.md)
