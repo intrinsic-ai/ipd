@@ -23,7 +23,7 @@ Accepted at CVPR 2024!
 In the repo you can find the evaluation dataset as well as links to relevant cad models
 
 Dataset download is available [here](Dataset.md)
-> Dataset is in BOP format
+> Dataset is in BOP format.
 ```bash
 CAMERA_TYPE/DATASET_NAME/
 --- dataset_info.json
@@ -38,7 +38,12 @@ CAMERA_TYPE/DATASET_NAME/
 --------------- 0_EXPOSURE_2.png
 --------------- 0_EXPOSURE_3.png
 --------------- 0_EXPOSURE_4.png
+------------ depth/  # for Photoneo only
+--------------- 000000.png
 ```
+scene_gt.json contains the part poses in the respective camera coordinate frame. 
+scene_pose.json contains the hand eye calibration (robot base in the camera coordinate frame) and the gripper pose in robot base coordinate frame.
+For FLIR_polar we include originally captured distorted images and add the distortion parameters in scene_camera.json. Undistortion of FLIR_polar before computing AOLP and DOLP can lead to artifacts. 
 
 ### Parts used
 We purchased all physical parts from McMaster-Carr's website. We give detailed purchase instructions [here](Parts.md)
