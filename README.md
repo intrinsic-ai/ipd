@@ -25,18 +25,19 @@ In the repo you can find the evaluation dataset as well as links to relevant cad
 Dataset download is available [here](Dataset.md)
 > Dataset is in BOP format
 ```bash
-dataset_id/camera/
---- calibration.pkl
---- robot_poses.json
---- ground_truth.json
---- scene_0/
------- cam_id_1/
---------- img.png
------- cam_id_2/
---------- img.png
------- cam_id_3/
---------- img.png
---- scene_1/ ... n
+CAMERA_TYPE/DATASET_NAME/
+--- dataset_info.json
+--- test/
+------ SCENE_ID/
+--------- CAM_ID/
+------------ scene_camera.json
+------------ scene_gt.json
+------------ scene_pose.json
+------------ rgb/
+--------------- 0_EXPOSURE_1.png
+--------------- 0_EXPOSURE_2.png
+--------------- 0_EXPOSURE_3.png
+--------------- 0_EXPOSURE_4.png
 ```
 
 ### Parts used
