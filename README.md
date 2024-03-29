@@ -34,6 +34,7 @@ CAMERA_TYPE/DATASET_NAME/
 ------------ scene_gt.json
 ------------ scene_pose.json
 ------------ rgb/
+--------------- 000000.png  # for Photoneo only, a single 16bit image; we don't provide separate exposures for Photoneo
 --------------- 0_EXPOSURE_1.png
 --------------- 0_EXPOSURE_2.png
 --------------- 0_EXPOSURE_3.png
