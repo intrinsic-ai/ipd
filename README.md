@@ -12,10 +12,10 @@ Accepted at CVPR 2024!
 ## This Repo
 
 - [x] March 29th: Dataset Released!
-- [ ] April 15th: Scanned CAD Available
-- [ ] May 15th: Code for Robot Consistency Evaluation Method
-- [ ] June 1st: Code for downloading and visualization data
-- [ ] June 15th: Leaderboard for submitting results on test images
+- x April 15th: Scanned CAD Available
+- x May 15th: Code for Robot Consistency Evaluation Method
+- x June 1st: Code for downloading and visualization data
+- x June 15th: Leaderboard for submitting results on test images
 
 ## Dataset
 ![alt text](assets/dataset.png)
