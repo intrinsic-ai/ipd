@@ -1,0 +1,6 @@
+ipykernel
+pyrender
+trimesh
+opencv-python
+numpy
+matplotlib

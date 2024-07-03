@@ -12,20 +12,23 @@ Accepted at CVPR 2024!
 ## This Repo
 
 - [x] March 29th: Dataset Released!
-- [ ] April 15th: Scanned CAD Available
-- [ ] May 15th: Code for Robot Consistency Evaluation Method
-- [ ] June 1st: Code for downloading and visualization data
-- [ ] June 15th: Leaderboard for submitting results on test images
+- [x] July 3rd: Scanned CAD [Available](Dataset.md#model-table-with-download-links)
+- [x] July 3rd: Code for [downloading](./scripts/dataset/README.md) and [visualization data](./render.ipynb)
+- [ ] August 15th: Code for Robot Consistency Evaluation Method
+- [ ] September 15th: Leaderboard for submitting results on test images
 
 ## Dataset
 ![alt text](assets/dataset.png)
 
 In the repo you can find the evaluation dataset as well as links to relevant cad models
 
-Dataset download is available [here](Dataset.md)
+Please use our scripts to download/extract datasets and cad models in [scripts/dataset](./scripts/dataset/README.md)
+
+Dataset and CAD model descriptions along with download links are available [here](Dataset.md)
+
 > Dataset is in BOP format.
 ```bash
-CAMERA_TYPE/DATASET_NAME/
+DATASET_NAME/
 --- dataset_info.json
 --- test/
 ------ SCENE_ID/
@@ -47,6 +50,11 @@ _scene_gt.json_ contains the part poses in the respective camera coordinate fram
 _scene_pose.json_ contains the hand eye calibration (robot base in the camera coordinate frame) and the gripper pose in robot base coordinate frame.
 
 For FLIR_polar we include originally captured distorted images and add the distortion parameters in _scene_camera.json_. Undistortion of FLIR_polar before computing AOLP and DOLP can lead to artifacts. 
+
+## Visualization Demo
+
+Demo notebook for visualizing ground truth cad models overlaid on camera images provided in [`render.ipynb`](./render.ipynb). 
+Python requirements in [`render.requirements.txt`](./render.requirements.txt).
 
 ### Parts used
 We purchased all physical parts from McMaster-Carr's website. We give detailed purchase instructions [here](Parts.md)
