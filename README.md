@@ -53,9 +53,34 @@ For FLIR_polar we include originally captured distorted images and add the disto
 
 ## Visualization Demo
 
-Demo notebook for visualizing ground truth cad models overlaid on camera images provided in [`render.ipynb`](./render.ipynb). 
+Example notebook demonstrating how to visualize ground truth cad models overlaid on dataset images in [`render.ipynb`](./render.ipynb). 
+
 Python requirements in [`render.requirements.txt`](./render.requirements.txt).
 
+<table>
+    <tr>
+        <td> 
+            <b>Basler-LR sample visualization</b>
+            <img src="assets/render/dataset_basket_0_Basler-LR.png"  alt="Basler-LR sample visualization" width = 640px height = 360px >
+        </td>
+        <td> 
+            <b>Basler-HR sample visualization</b>
+            <img src="assets/render/dataset_basket_4_Basler-HR.png"  alt="Basler-HR sample visualization" width = 640px height = 360px >
+        </td>
+    </tr> 
+    <tr>
+        <td> 
+            <b>FLIR_polar sample visualization</b>
+            <img src="assets/render/dataset_darkbg_3_FLIR_polar.png"  alt="Basler-LR sample visualization" width = 640px height = 360px >
+        </td>
+        <td> 
+            <b>Photoneo sample visualization</b>
+            <img src="assets/render/dataset_texturedbg_4_Photoneo.png"  alt="Basler-HR sample visualization" width = 640px height = 360px >
+        </td>
+    </tr>
+</table>
+
+## Code>
 ### Parts used
 We purchased all physical parts from McMaster-Carr's website. We give detailed purchase instructions [here](Parts.md)
 
