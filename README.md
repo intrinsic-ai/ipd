@@ -12,20 +12,23 @@ Accepted at CVPR 2024!
 ## This Repo
 
 - [x] March 29th: Dataset Released!
-- [ ] April 15th: Scanned CAD Available
-- [ ] May 15th: Code for Robot Consistency Evaluation Method
-- [ ] June 1st: Code for downloading and visualization data
-- [ ] June 15th: Leaderboard for submitting results on test images
+- [x] July 3rd: Scanned CAD [Available](Dataset.md#model-table-with-download-links)
+- [x] July 3rd: Code for [downloading](./scripts/dataset/README.md) and [visualization data](./render.ipynb)
+- [ ] August 15th: Code for Robot Consistency Evaluation Method
+- [ ] September 15th: Leaderboard for submitting results on test images
 
 ## Dataset
 ![alt text](assets/dataset.png)
 
 In the repo you can find the evaluation dataset as well as links to relevant cad models
 
-Dataset download is available [here](Dataset.md)
+Please use our scripts to download/extract datasets and cad models in [scripts/dataset](./scripts/dataset/README.md)
+
+Dataset and CAD model descriptions along with download links are available [here](Dataset.md)
+
 > Dataset is in BOP format.
 ```bash
-CAMERA_TYPE/DATASET_NAME/
+DATASET_NAME/
 --- dataset_info.json
 --- test/
 ------ SCENE_ID/
@@ -48,6 +51,36 @@ _scene_pose.json_ contains the hand eye calibration (robot base in the camera co
 
 For FLIR_polar we include originally captured distorted images and add the distortion parameters in _scene_camera.json_. Undistortion of FLIR_polar before computing AOLP and DOLP can lead to artifacts. 
 
+## Visualization Notebook
+
+Example notebook demonstrating how to visualize ground truth cad models overlaid on dataset images in [`render.ipynb`](./render.ipynb). 
+
+Python requirements in [`render.requirements.txt`](./render.requirements.txt).
+
+<table>
+    <tr>
+        <td> 
+            <b>Basler-LR sample visualization</b>
+            <img src="assets/render/dataset_basket_0_Basler-LR.png"  alt="Basler-LR sample visualization" width = 640px height = 360px >
+        </td>
+        <td> 
+            <b>Basler-HR sample visualization</b>
+            <img src="assets/render/dataset_basket_4_Basler-HR.png"  alt="Basler-HR sample visualization" width = 640px height = 360px >
+        </td>
+    </tr> 
+    <tr>
+        <td> 
+            <b>FLIR_polar sample visualization</b>
+            <img src="assets/render/dataset_darkbg_3_FLIR_polar.png"  alt="Basler-LR sample visualization" width = 640px height = 360px >
+        </td>
+        <td> 
+            <b>Photoneo sample visualization</b>
+            <img src="assets/render/dataset_texturedbg_4_Photoneo.png"  alt="Basler-HR sample visualization" width = 640px height = 360px >
+        </td>
+    </tr>
+</table>
+
+## Code>
 ### Parts used
 We purchased all physical parts from McMaster-Carr's website. We give detailed purchase instructions [here](Parts.md)
 
