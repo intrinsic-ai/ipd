@@ -12,38 +12,42 @@ export FOLDER=./datasets
 bash scripts/dataset/get_dataset.sh $ID $CAMERA $FOLDER
 ```
 
-## Option 2: Python Script
+## Option 2: Python CLI
 
 Has options to download one or more datasets to specified folder, option to extract (will not extract by default). Then will download all cad models to `models` subfolder.
 
-- Python requirements in [`get_dataset.requirements.txt`](./get_dataset.requirements.txt).
-    ```bash
-    pip install -r scripts/dataset/get_dataset.requirements.txt
-    ```
+- Install the `ipd-cli`:
+    - From source:
+        1. Clone this repo
+        2. Install `pip -e .[cli]`
+    - Via pip:
+        1. `pip install ipd[cli]`
+    
+    Should have the download cli available via `ipd-cli` command.
 
 - To download and extract all datasets:
     ```bash
-    python scripts/dataset/get_dataset.py --id ALL --camera ALL --folder ./datasets --extract
+    ipd-cli --id ALL --camera ALL --folder ./datasets --extract
     ```
 
 - To download and extract one dataset:
     ```bash
-    python scripts/dataset/get_dataset.py --id dataset_basket_1  --camera Basler-LR --folder ./datasets --extract
+    ipd-cli --id dataset_basket_1  --camera Basler-LR --folder ./datasets --extract
     ```
 
 - To download and extract all cameras for one dataset:
     ```bash
-    python scripts/dataset/get_dataset.py --id dataset_basket_1  --camera ALL --folder ./datasets --extract
+    ipd-cli --id dataset_basket_1  --camera ALL --folder ./datasets --extract
     ```
 
 - To download and extract all datasets for one camera:
     ```bash
-    python scripts/dataset/get_dataset.py --id ALL  --camera Basler-LR --folder ./datasets --extract
+    ipd-cli --id ALL  --camera Basler-LR --folder ./datasets --extract
     ```
 
-- Command line options:
+- All command line options:
     ```bash
-    ./scripts/dataset/get_dataset.py
+    ipd-cli -h
 
     options:
     -h, --help              show this help message and exit

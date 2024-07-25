@@ -1,0 +1,44 @@
+[project]
+name = "intrinsic-ipd"
+version = "0.1.0"
+description = "Industrial plentopic dataset and robot consistency metric published in CVPR 2024 by Intrinsic AI."
+readme = "README.md"
+
+authors = [
+    {name = "Intrinsic Innovation LLC", email = "agastyak@intrinsic.ai"},
+]
+
+requires-python = ">=3.8"
+
+dependencies = [
+    "aenum>=3.1.15",
+    "numpy>=1.24.4",
+    "opencv-python>=4.8.1.78",
+]
+
+license = {text = "CC-BY-NC-SA-4.0"}
+
+[project.optional-dependencies]
+render = [
+    "ipykernel>=6.29.5",
+    "pyrender>=0.1.45",
+    "trimesh>=4.4.3",
+    "matplotlib>=3.7.5",
+]
+
+cli = [
+    "tqdm>=4.66.4",
+]
+
+[project.scripts]
+intrinsic-ipd-cli = "ipd.download_cli:main"
+
+[project.urls]
+Homepage = "https://github.com/intrinsic-ai/ipd"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true

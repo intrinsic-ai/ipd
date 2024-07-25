@@ -1,6 +1,0 @@
-ipykernel==6.29.5
-pyrender==0.1.45
-trimesh==4.4.1
-opencv-python==4.10.0.84
-numpy==2.0.0
-matplotlib==3.9.0
