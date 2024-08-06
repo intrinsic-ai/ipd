@@ -91,7 +91,9 @@ class IPDataset:
 
         logger.info(
                     f"\n\tDataset Path:\t{self.dataset_path}"+
-                    f"\n\tCamera Type:\t{self.camera.type} \t {self.camera.folder}"+
+                    f"\n\tCamera Type:\t{self.camera.type} (ID: {self.camera.folder})"+
+                    f"\n\tLighting:\t{self.lighting.name}"+
+                    f"\n\tResize:\t\t{self.resize}"
                     f"\n\tNum Scenes:\t{len(self.scenes)}"
                 )
     
@@ -167,10 +169,33 @@ class IPDataset:
         logger.warn(f"Mesh file for {object_name} not found at {mesh_file}")
         return None
 
-    def get_camera(self, framework: CameraFramework = CameraFramework.OPENCV) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    def get_symm(self, object_name: str) -> Union[dict, None]:
+        """Returns the symmetry transformations for the specified object, or None if no file found.
+
+        Args:
+            object_name (str): The name of the part to get the symmetry transformations for.
+
+        Returns:
+            np.ndarray: symmetry transforms
+        """
+        
+        symm_json = os.path.join(self.root, "models", "symmetries", f"{object_name}_symm.json")
+        if os.path.exists(symm_json):
+            logger.debug(f"Found symmetries json for {object_name}")
+            with open(symm_json) as f:
+                symmetries = json.load(f)
+            return symmetries
+        logger.warn(f"Symmetries json for {object_name} not found at {symm_json}")
+        return None
+        
+
+
+    def get_camera(self, resize:float=None, framework: CameraFramework = CameraFramework.OPENCV) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         """Returns camera intrinsics, distortion, and pose in the specified framework.
 
         Args:
+            resize (float, optional): 
+                The resize factor for the camera. Defaults to self.resize (1 = no resizing). 
             framework (CameraFramework, optional): 
                 The camera framework to return the camera info in. Defaults to CameraFramework.OPENCV.
                 See ipd.constants.CameraFramework for available frameworks.
@@ -184,7 +209,9 @@ class IPDataset:
                 Pose of camera relative to world frame, converted to given camera framework. 
             
         """
-        output = {}
+        if resize is None:
+            resize = self.resize
+        
         first_scene_id = next(iter(self.scenes))
         first_scene_path = self.scenes[first_scene_id]
         camera_path = os.path.join(first_scene_path, self.camera.folder)
@@ -193,13 +220,16 @@ class IPDataset:
             camera_params = json.load(f)['0']
         intrinsics = camera_params['cam_K']
         K = np.array(intrinsics).reshape((3, 3)) 
+        if resize != 1:
+            K[:2,:] *= resize
+
         dist = np.array(camera_params["cam_dist"])
         
-        r = np.array(camera_params['cam_R_c2w']).reshape((3, 3))
-        t = np.array(camera_params['cam_t_c2w']) 
+        # r = np.array(camera_params['cam_R_c2w']).reshape((3, 3))     #TODO This is wrong?
+        # t = np.array(camera_params['cam_t_c2w'])                     #TODO This is wrong?
         c2w = np.eye(4)  
-        c2w[:3, :3] = r
-        c2w[:3, 3] = t
+        # c2w[:3, :3] = r                                              #TODO This is wrong?
+        # c2w[:3, 3] = t                                               #TODO This is wrong?
 
         c2w = CameraFramework.convert(c2w, CameraFramework.OPENCV, framework)
         return K, dist, c2w
@@ -250,6 +280,7 @@ class IPDataset:
             o2c = np.eye(4)
             o2c[:3, :3] = r
             o2c[:3, 3] = t
+
             o2c_by_object[(obj["obj_name"], int(obj["obj_id"]))] = o2c
 
         return c2s, o2c_by_object
@@ -369,7 +400,8 @@ class IPDataset:
     def render(self, 
                scene_id:int, 
                obj_name:str = None,
-               obj_id:int = None
+               obj_id:int = None,
+               poses:dict[(str, int), np.ndarray] = None,
         ) -> tuple[np.ndarray, np.ndarray]:
         """ Renders the specified scene with the specified object.
 
@@ -386,7 +418,8 @@ class IPDataset:
             scene_id (int): The scene ID to render.
             obj_name (str, optional): The name of the object to render. Defaults to None, which will render all objects.
             obj_id (int, optional): The ID of the object to render. Defaults to None, which will render all objects.
-
+            poses (dict[(str, int), np.ndarray], optional): A dictionary of poses for each object to render. Defaults to None, which will render the ground truth pose.
+        
         Returns:
             color (h, w, 3) uint8 or (h, w, 4) uint8: 
                 The color buffer in RGB format, 
@@ -421,15 +454,17 @@ class IPDataset:
             img = self.get_img(scene_id, self.camera.images[0])
         
         height, width = img.shape[:2]
+        
         r = pyrender.OffscreenRenderer(width, height)
-        _, o2c_by_object = self.get_scene_labels(scene_id)
+        if poses:
+            o2c_by_object = poses
+        else:    
+            _, o2c_by_object = self.get_scene_labels(scene_id)
         
         scene = pyrender.Scene(bg_color=[0, 0, 0, 0])
 
-        K, _, _ = self.get_camera()
+        K, _, c2w = self.get_camera(framework=CameraFramework.OPENGL)
         logger.debug(f"K: {K}")
-        c2w = np.eye(4) 
-        c2w = CameraFramework.convert(c2w, CameraFramework.OPENCV, CameraFramework.OPENGL)
         icamera = pyrender.IntrinsicsCamera(fx=K[0][0], fy=K[1][1], cx=K[0][2], cy=K[1][2], zfar=10000)
         scene.add(icamera, pose=c2w)
 
@@ -454,9 +489,10 @@ class IPDataset:
         return np.array(color), np.array(depth)
         
     def render_masks(self, 
-               scene_id:int
+               scene_id:int,
+               resize:float = None,
         ) ->  dict[ tuple[str, int] , np.ndarray ]:
-        """ Renders masks for all objects in the specified scene.
+        """ Renders masks for all objects in the specified scene with **NO RESIZING!**
 
         Note:
             This method requires the following libraries to be installed:
@@ -469,6 +505,8 @@ class IPDataset:
 
         Args:
             scene_id (int): The scene ID to render masks for.
+            resize (float, optional): 
+                The resize factor for the image. Defaults to self.resize when None. (1 = no resizing).  
 
         Returns:
             masks_by_object ( dict[ (str, int), np.ndarray[h, w, 3] ] ):
@@ -495,7 +533,7 @@ class IPDataset:
             return None, None
 
         with DisableLogger():
-            img = self.get_img(scene_id, self.camera.images[0])
+            img = self.get_img(scene_id, self.camera.images[0], resize=resize)
         
         height, width = img.shape[:2]
         r = pyrender.OffscreenRenderer(width, height)
@@ -503,10 +541,8 @@ class IPDataset:
         
         scene = pyrender.Scene(bg_color=[0, 0, 0, 0])
 
-        K, _, _ = self.get_camera()
+        K, _, c2w = self.get_camera(framework=CameraFramework.OPENGL, resize=resize)
         logger.debug(f"K: {K}")
-        c2w = np.eye(4) 
-        c2w = CameraFramework.convert(c2w, CameraFramework.OPENCV, CameraFramework.OPENGL)
         icamera = pyrender.IntrinsicsCamera(fx=K[0][0], fy=K[1][1], cx=K[0][2], cy=K[1][2], zfar=10000)
         scene.add(icamera, pose=c2w)
 
@@ -549,7 +585,7 @@ class IPDataset:
             overwrite (bool, optional): Whether or not to overwrite saved masks. Defaults to False.
         """
         for scene_id in self.scenes:
-            masks = self.render_masks(scene_id)
+            masks = self.render_masks(scene_id, resize=1.0) #no resizing
 
             for obj_name, obj_id in masks:
                 

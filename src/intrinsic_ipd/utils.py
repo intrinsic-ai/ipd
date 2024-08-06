@@ -42,9 +42,12 @@ def extract(zip_path, to_dir: Union[str, os.PathLike]) -> None:
     print(f"Extracted {zip_path} to {to_dir}")
 
 def download_cads(to_dir: Union[str, os.PathLike]) -> None:
-    for cad_file in CAD_FILES:
-        url = f"https://storage.googleapis.com/akasha-public/industrial_plenoptic_dataset/cad_models/{cad_file}"
+    for cad_name in CAD_FILES:
+        url = f"https://storage.googleapis.com/akasha-public/industrial_plenoptic_dataset/cad_models/{cad_name}.stl"
         download(url, to_dir=f"{to_dir}/models")
+        # TODO
+        # url = f"https://storage.googleapis.com/akasha-public/industrial_plenoptic_dataset/cad_models/{cad_name}_symm.json"
+        # download(url, to_dir=f"{to_dir}/models")
 
 def download_dataset(dataset_id : str, camera_name : str, to_dir : Union[str, os.PathLike]) -> Optional[Union[str, os.PathLike]]:
     assert dataset_id in DATASET_IDS, f"Invalid dataset id {dataset_id}, must be one of {DATASET_IDS}"

@@ -14,6 +14,7 @@ dependencies = [
     "aenum>=3.1.15",
     "numpy>=1.24.4",
     "opencv-python>=4.8.1.78",
+    "pyyaml>=6.0.1",
 ]
 
 license = {text = "CC-BY-NC-SA-4.0"}
@@ -28,6 +29,9 @@ render = [
 
 cli = [
     "tqdm>=4.66.4",
+]
+evaluate = [
+    "pandas>=2.0.3",
 ]
 
 [project.scripts]
