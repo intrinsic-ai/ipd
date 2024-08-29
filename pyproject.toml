@@ -14,24 +14,22 @@ dependencies = [
     "aenum>=3.1.15",
     "numpy>=1.24.4",
     "opencv-python>=4.8.1.78",
-    "pyyaml>=6.0.1",
+    "xarray>=2022.3.0,!=2022.6.*,!=2022.9.*,!=2022.10.*,!=2022.11.*,!=2022.12.*,!=2023.1.*,!=2023.2.*,!=2023.3.*,!=2023.4.*,!=2023.5.*,!=2023.6.*,",
+    "pandas>=2.0.3",
+    "pyrender>=0.1.45",
+    "trimesh>=4.4.7",
+    "scipy>=1.9.3",
+    "lapsolver>=1.1.0",
+    "tqdm>=4.66.5",
 ]
 
 license = {text = "CC-BY-NC-SA-4.0"}
 
 [project.optional-dependencies]
-render = [
+notebooks = [
     "ipykernel>=6.29.5",
-    "pyrender>=0.1.45",
-    "trimesh>=4.4.3",
     "matplotlib>=3.7.5",
-]
-
-cli = [
-    "tqdm>=4.66.4",
-]
-evaluate = [
-    "pandas>=2.0.3",
+    "pyyaml>=6.0.2",
 ]
 
 [project.scripts]
