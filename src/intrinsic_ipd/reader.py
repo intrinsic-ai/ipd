@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 import json
+import yaml
 import itertools, operator
 import cv2
 from importlib import reload
@@ -605,7 +606,7 @@ class IPDReader:
     
         """
         self.assert_valid_part(part)
-        mesh_file = mesh_file = os.path.join(self.root, "models", f"{part}.stl")
+        mesh_file = os.path.join(self.root, "models", f"{part}.stl")
         if not os.path.exists(mesh_file):
             raise FileNotFoundError(f"No mesh file found for {part} at {mesh_file}")
         if return_path:
@@ -615,6 +616,18 @@ class IPDReader:
             mesh = trimesh.load(mesh_file)
 
         return trimesh.load(mesh_file)
+
+    def get_match_thresh_by_part(self) -> dict[str, float]:
+        """ Return dictionary of part-wise floats representing maximum distance to match for given part.
+
+        Returns:
+            dict[str, float]: Dictionary of thresholds to use matching predictions for each part.
+        """
+        
+        config = yaml.load(os.path.join(self.root, "models", "config.yaml"))
+        thresh_by_part = config['match_threshold']
+        return thresh_by_part
+    
 
     def remove_symmetry(self,
                         part:str, 
