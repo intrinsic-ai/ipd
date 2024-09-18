@@ -1,0 +1,22 @@
+match_threshold: # maximum distance for a match for a given part
+  corner_bracket: 32.38017666683971
+  corner_bracket0: 39.02804491183019
+  corner_bracket1: 10.877681825412408
+  corner_bracket2: 500 #missing
+  corner_bracket3: 26.39645391091472
+  corner_bracket4: 24.395902842373566
+  corner_bracket5: 18.918008035086167
+  corner_bracket6: 17.808145893935368
+  gear1: 25.815695401421685
+  gear2: 29.26397887556897
+  handrail_bracket: 500 #missing
+  hex_manifold: 500 #missing
+  l_bracket: 64.66071511009928
+  oblong_float: 62.70328076467595
+  pegboard_basket: 126.52277583794437
+  pipe_fitting_unthreaded: 40.67292674500291
+  single_pinch_clamp: 42.761346229284214
+  square_bracket: 43.12704523580799
+  t_bracket: 53.88417685702441
+  u_bolt: 71.575479466246
+  wraparound_bracket: 49.71277681037156

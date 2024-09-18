@@ -62,7 +62,7 @@ class PoseMatcher:
         self.raw_o2c_dict = defaultdict(dict)
         self.gt_o2c = reader.remove_symmetry_xarray(reader.o2c)
 
-        self.dist_thresh_by_part = dist_thresh_by_part
+        self.dist_thresh_by_part = dist_thresh_by_part if dist_thresh_by_part else reader.get_match_dist_thresh_by_part()
         self.default_thresh = dist_default_thresh
     
     def register_poses(self,

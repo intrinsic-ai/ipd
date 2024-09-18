@@ -617,14 +617,14 @@ class IPDReader:
 
         return trimesh.load(mesh_file)
 
-    def get_match_thresh_by_part(self) -> dict[str, float]:
+    def get_match_dist_thresh_by_part(self) -> dict[str, float]:
         """ Return dictionary of part-wise floats representing maximum distance to match for given part.
 
         Returns:
             dict[str, float]: Dictionary of thresholds to use matching predictions for each part.
         """
-        
-        config = yaml.load(os.path.join(self.root, "models", "config.yaml"))
+        with open(os.path.join(self.root, "models", "config.yaml")) as stream:
+            config = yaml.safe_load(stream)
         thresh_by_part = config['match_threshold']
         return thresh_by_part
     
