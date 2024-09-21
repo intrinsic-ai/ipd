@@ -1,6 +1,10 @@
 # Scripts to download and extract the dataset, cad models
 
-## Option 1: Bash Script
+## Option 1: IPDReader
+
+See `ipd/demo_reader.ipynb`. The `IPDReader` class will download and read the dataset.
+
+## Option 2: Bash Script
 
 Will download one specified dataset, and extract it. Then will download all cad models to `models` subfolder.
 
@@ -12,42 +16,42 @@ export FOLDER=./datasets
 bash scripts/dataset/get_dataset.sh $ID $CAMERA $FOLDER
 ```
 
-## Option 2: Python CLI
+## Option 3: Python CLI
 
 Has options to download one or more datasets to specified folder, option to extract (will not extract by default). Then will download all cad models to `models` subfolder.
 
-- Install the `ipd-cli`:
+- Install the `intrinsic-ipd-cli`:
     - From source:
         1. Clone this repo
-        2. Install `pip -e .[cli]`
-    - Via pip:
-        1. `pip install ipd[cli]`
+        2. Install `pip -e .`
+    - Via pip: (not yet available!!!)
+        1. `pip install ipd`
     
     Should have the download cli available via `ipd-cli` command.
 
 - To download and extract all datasets:
     ```bash
-    ipd-cli --id ALL --camera ALL --folder ./datasets --extract
+    intrinsic-ipd-cli --id ALL --camera ALL --folder ./datasets --extract
     ```
 
 - To download and extract one dataset:
     ```bash
-    ipd-cli --id dataset_basket_1  --camera Basler-LR --folder ./datasets --extract
+    intrinsic-ipd-cli --id dataset_basket_1  --camera Basler-LR --folder ./datasets --extract
     ```
 
 - To download and extract all cameras for one dataset:
     ```bash
-    ipd-cli --id dataset_basket_1  --camera ALL --folder ./datasets --extract
+    intrinsic-ipd-cli --id dataset_basket_1  --camera ALL --folder ./datasets --extract
     ```
 
 - To download and extract all datasets for one camera:
     ```bash
-    ipd-cli --id ALL  --camera Basler-LR --folder ./datasets --extract
+    intrinsic-ipd-cli --id ALL  --camera Basler-LR --folder ./datasets --extract
     ```
 
 - All command line options:
     ```bash
-    ipd-cli -h
+    intrinsic-ipd-cli -h
 
     options:
     -h, --help              show this help message and exit

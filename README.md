@@ -51,11 +51,10 @@ _scene_pose.json_ contains the hand eye calibration (robot base in the camera co
 
 For FLIR_polar we include originally captured distorted images and add the distortion parameters in _scene_camera.json_. Undistortion of FLIR_polar before computing AOLP and DOLP can lead to artifacts. 
 
-## Visualization Notebook
+## Toolkit and Demo Notebooks
 
-Example notebook demonstrating how to visualize ground truth cad models overlaid on dataset images in [`render.ipynb`](./render.ipynb). 
+Please see the demo notebooks for using the IPD Toolkit to download, read, render, and match & evaluate predictions using Robot Consistency as described in the paper.
 
-Python requirements in [`render.requirements.txt`](./render.requirements.txt).
 
 <table>
     <tr>

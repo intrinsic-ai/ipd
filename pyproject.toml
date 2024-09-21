@@ -33,7 +33,7 @@ notebooks = [
 ]
 
 [project.scripts]
-intrinsic-ipd-cli = "ipd.download_cli:main"
+intrinsic-ipd-cli = "intrinsic_ipd.download_cli:main"
 
 [project.urls]
 Homepage = "https://github.com/intrinsic-ai/ipd"
