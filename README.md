@@ -55,7 +55,6 @@ For FLIR_polar we include originally captured distorted images and add the disto
 
 Please see the demo notebooks for using the IPD Toolkit to download, read, render, and match & evaluate predictions using Robot Consistency as described in the paper.
 
-
 <table>
     <tr>
         <td> 
@@ -79,8 +78,11 @@ Please see the demo notebooks for using the IPD Toolkit to download, read, rende
     </tr>
 </table>
 
-## Code>
-### Parts used
+
+## BOP compatibility (EXPERIMENTAL)
+Notebook with documentation for converting to BOP format provided in `convert_to_bop.ipynb`. You do not need to clone the `bop_toolkit` submodule unless using this script.
+
+## Parts used
 We purchased all physical parts from McMaster-Carr's website. We give detailed purchase instructions [here](Parts.md)
 
 ## License
