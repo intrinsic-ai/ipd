@@ -64,6 +64,9 @@ class PoseMatcher:
 
         self.dist_thresh_by_part = dist_thresh_by_part if dist_thresh_by_part else reader.get_match_dist_thresh_by_part()
         self.default_thresh = dist_default_thresh
+
+        if not self.ordered:
+            logging.info("Matching with distance thresholds:" + str(self.dist_thresh_by_part))
     
     def register_poses(self,
             scene:int,
@@ -253,25 +256,27 @@ class PoseMatcher:
         # returns a list of pairings from raw to true instances
         return hungarian(pose_distances_masked, pose_distances_masked['pred_instance'].data, pose_distances_masked['instance'].data)
     
-    def get_counts(self):
-        if self.ordered:
-            return 1
-
-        raw_o2c_counts = np.array([
-            [ len(self.raw_o2c_dict[scene].get(part, [])) for part in self.reader.parts ] for scene in self.reader.scenes.keys() 
-        ])
-        
-        prediction_counts = xr.DataArray(
-            raw_o2c_counts,
-            dims = ["scene", "part"],
-            coords={
-                "scene" : list(self.reader.scenes.keys()),
-                "part": list(self.reader.parts)
-            }
-        )
+    def get_stats(self):
         ismatched = ~(self.matched_o2c.isnull().any(dim=[ "transform_major", "transform_minor"]))
 
-        test_positive_counts = prediction_counts.sum("scene")
+        if self.ordered:
+            # matches = tests
+            test_positive_counts = ismatched.sum("scene").groupby("part").sum()
+        else:
+            # tests = raw_o2c counts by part
+            raw_o2c_counts = np.array([
+                [ len(self.raw_o2c_dict[scene].get(part, [])) for part in self.reader.parts ] for scene in self.reader.scenes.keys() 
+            ])
+            prediction_counts = xr.DataArray(
+                raw_o2c_counts,
+                dims = ["scene", "part"],
+                coords={
+                    "scene" : list(self.reader.scenes.keys()),
+                    "part": list(self.reader.parts)
+                }
+            )
+            test_positive_counts = prediction_counts.sum("scene")
+
         true_positive_counts = ismatched.sum("scene").groupby("part").sum()
         actual_positive_counts = ismatched.count("scene").groupby("part").sum()
 

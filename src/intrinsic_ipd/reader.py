@@ -147,7 +147,8 @@ class IPDReader:
                 if zip_path:
                     extract(zip_path, self.root)
                     os.remove(zip_path)
-                download_cads(self.root)
+        if download:
+            download_cads(self.root)
 
     def _check_and_render_masks(self, overwrite: bool = False) -> None:
         """ Create and save object level masks for every object and every scene. If overwrite is False, check if masks already exists and skip.
@@ -598,6 +599,7 @@ class IPDReader:
         
         Returns:
             mesh (trimesh.Mesh): The object mesh.
+
             mesh_file (os.PathLike): The path to the mesh file, if return_path is True.
             
         
@@ -623,7 +625,7 @@ class IPDReader:
         Returns:
             dict[str, float]: Dictionary of thresholds to use matching predictions for each part.
         """
-        with open(os.path.join(self.root, "models", "config.yaml")) as stream:
+        with open(os.path.join(self.root, "models", "matching_thresholds.yaml")) as stream:
             config = yaml.safe_load(stream)
         thresh_by_part = config['match_threshold']
         return thresh_by_part

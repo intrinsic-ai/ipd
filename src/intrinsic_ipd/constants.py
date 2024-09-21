@@ -28,13 +28,14 @@ DATASET_IDS = [
     "dataset_texturedbg_3"
 ]
 
-CAD_FILES = [
+PART_NAMES = [
     "corner_bracket",
     "corner_bracket0",
     "corner_bracket1",
     "corner_bracket2",
     "corner_bracket3",
     "corner_bracket4",
+    "corner_bracket5", 
     "corner_bracket6",
     "gear1",
     "gear2",
@@ -51,6 +52,16 @@ CAD_FILES = [
     "wraparound_bracket",
 ]
 
+skip_symmetries = ['corner_bracket2', 
+                     'handrail_bracket', 
+                     'hex_manifold',
+                     'pegboard_basket',
+                     't_bracket',
+                     'corner_bracket5'
+                     ]
+skip_models = [
+    'corner_bracket5'
+]
 
 class CameraFramework(Enum):
     """Camera Frameworks.

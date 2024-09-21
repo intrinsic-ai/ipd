@@ -1,4 +1,4 @@
-from .constants import CAD_FILES, DATASET_IDS, CAMERA_NAMES
+from .constants import PART_NAMES, DATASET_IDS, CAMERA_NAMES, skip_models, skip_symmetries
 
 import os
 import urllib.request
@@ -28,8 +28,12 @@ def download(url, to_dir: Union[str, os.PathLike]) -> Optional[Union[str, os.Pat
                                 miniters=1, desc=url.split('/')[-1]) as t:
                 file_path, _ = urllib.request.urlretrieve(url, filename=file_path, reporthook=t.update_to)
         except Exception as e:
-            os.remove(file_path)
-            raise e
+            try:
+                os.remove(file_path)
+            except:
+                pass
+            logging.error(f"url: {url} failed to download with error: " + str(e))
+            return
     else:
         logging.debug(f"{file_path} already exists")
         return
@@ -45,12 +49,17 @@ def extract(zip_path, to_dir: Union[str, os.PathLike]) -> None:
     print(f"Extracted {zip_path} to {to_dir}")
 
 def download_cads(to_dir: Union[str, os.PathLike]) -> None:
-    for cad_name in CAD_FILES:
-        url = f"https://storage.googleapis.com/akasha-public/industrial_plenoptic_dataset/cad_models/{cad_name}.stl"
-        download(url, to_dir=f"{to_dir}/models")
-        # TODO
-        # url = f"https://storage.googleapis.com/akasha-public/industrial_plenoptic_dataset/cad_models/{cad_name}_symm.json"
-        # download(url, to_dir=f"{to_dir}/models")
+    
+    for cad_name in PART_NAMES:
+        if cad_name not in skip_models:
+            url = f"https://storage.googleapis.com/akasha-public/industrial_plenoptic_dataset/cad_models/{cad_name}.stl"
+            download(url, to_dir=f"{to_dir}/models")
+
+        if cad_name not in skip_symmetries:
+            url = f"https://storage.googleapis.com/akasha-public/industrial_plenoptic_dataset/cad_models/symmetries/{cad_name}_symm.json"
+            download(url, to_dir=f"{to_dir}/models/symmetries")
+    url = f"https://storage.googleapis.com/akasha-public/industrial_plenoptic_dataset/cad_models/matching_thresholds.yaml"
+    download(url, to_dir=f"{to_dir}/models")
 
 def download_dataset(dataset_id : str, camera_name : str, to_dir : Union[str, os.PathLike]) -> Optional[Union[str, os.PathLike]]:
     assert dataset_id in DATASET_IDS, f"Invalid dataset id {dataset_id}, must be one of {DATASET_IDS}"

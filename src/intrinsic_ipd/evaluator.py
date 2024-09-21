@@ -1,5 +1,6 @@
 from collections import defaultdict
 from .reader import IPDReader
+from .matcher import PoseMatcher
 import numpy as np
 import pandas as pd
 import xarray as xr
@@ -115,4 +116,12 @@ class Evaluator:
 
         return self.measure_ground_truth_accuracy(o2c_gt=o2c_star, o2c_pred=o2c_pred, metric=metric)
     
+    def recall(self,
+               matcher:PoseMatcher):
+        stats = matcher.get_stats()
+        return stats.sel(counts='true_positive') / stats.sel(counts='actual_positive')
     
+    def precision(self,
+                  matcher:PoseMatcher) -> xr.DataArray:
+        stats = matcher.get_stats()
+        return stats.sel(counts='true_positive') / stats.sel(counts='test_positive') 

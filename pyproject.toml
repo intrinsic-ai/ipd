@@ -44,3 +44,11 @@ build-backend = "pdm.backend"
 
 [tool.pdm]
 distribution = true
+
+[tool.pdm.dev-dependencies]
+convert2bop = [
+    # "bop-toolkit @ git+https://github.com/thodan/bop_toolkit.git@master",
+    "open3d>=0.18.0",
+    "pymeshlab>=2023.12.post2",
+    "-e file:///${PROJECT_ROOT}/bop_toolkit#egg=bop-toolkit-lib",
+]
