@@ -19,7 +19,17 @@ class Evaluator:
     def measure_ground_truth_accuracy(self, 
                                       o2c_pred:xr.DataArray,
                                       o2c_gt:xr.DataArray = None,
-                                      metric:str='mvd'):
+                                      metric:str='mvd') -> xr.DataArray:
+        """ Measures accuracy of predicted poses against ground truth poses.
+
+        Args:
+            o2c_pred (xr.DataArray): Predicted poses (same dims and coords as self.reader.o2c)
+            o2c_gt (xr.DataArray, optional): Ground truth poses. Defaults to None, which will use self.reader.o2c.
+            metric (str, optional): 'mvd' or 'add'. Defaults to 'mvd'.
+
+        Returns:
+            xr.DataArray: Accuracy of predicted poses for each object.
+        """
         assert metric in ['mvd', 'add'], "unknown metric for pose accuracy, please pick one of ['mvd', 'add']"
 
         if o2c_gt is None:
@@ -81,7 +91,16 @@ class Evaluator:
     
     def measure_robot_consistency(self, 
                                   o2c_pred:xr.DataArray,
-                                  metric:str='mvd'):
+                                  metric:str='mvd') -> xr.DataArray:
+        """Measures robot consistency of predicted poses for an object across scenes.
+
+        Args:
+            o2c_pred (xr.DataArray): Predicted poses (same dims and coords as self.reader.o2c)
+            metric (str, optional): ['mvd', 'add']. Defaults to 'mvd'.
+
+        Returns:
+            xr.DataArray: Robot consistency metrics for each object.
+        """
         
         # Get predicted object poses in gripper frame
         c2g = self.reader.c2g
@@ -117,11 +136,27 @@ class Evaluator:
         return self.measure_ground_truth_accuracy(o2c_gt=o2c_star, o2c_pred=o2c_pred, metric=metric)
     
     def recall(self,
-               matcher:PoseMatcher):
+               matcher:PoseMatcher)-> xr.DataArray:
+        """ Recall is defined by the number of predictions matched to a ground truth instance for a particular part divided by the number of ground truth instances for that part.
+
+        Args:
+            matcher (PoseMatcher): Pose matcher containing registered pose predictions.
+
+        Returns:
+            xr.DataArray: Recall by part.
+        """
         stats = matcher.get_stats()
         return stats.sel(counts='true_positive') / stats.sel(counts='actual_positive')
     
     def precision(self,
                   matcher:PoseMatcher) -> xr.DataArray:
+        """ Precision is defined by the number of predictions matched to a ground truth instance for a particular part divided by the number of predictions for that part.
+
+        Args:
+            matcher (PoseMatcher): _description_
+
+        Returns:
+            xr.DataArray: _description_
+        """
         stats = matcher.get_stats()
         return stats.sel(counts='true_positive') / stats.sel(counts='test_positive') 

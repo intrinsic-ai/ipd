@@ -120,6 +120,12 @@ class PoseMatcher:
             self._save_matched_poses(scene, part, ordered_poses) 
     
     def clear(self, scene:int, part:str)->None:
+        """Clears registered poses for given scene and part.
+
+        Args:
+            scene (int): Scene id
+            part (str): Part name
+        """
         self.reader.assert_valid_scene(scene)
         self.reader.assert_valid_part(part)
 
@@ -129,40 +135,20 @@ class PoseMatcher:
         self.matched_o2c.loc[scene, part] = np.nan
     
     def clear_all(self):
+        """Clears all registered poses.
+
+        """
         self.raw_o2c = defaultdict(dict)
         self.matched_o2c = xr.full_like(self.reader.o2c, np.nan)
     
-    def get_matched_poses(self):
+    def get_matched_poses(self)->xr.DataArray:
+        """Returns matched pose predictions with the same dim and coords as reader.o2c.
+
+        Returns:
+            xr.DataArray: Matched predicted poses.
+        """
         return self.matched_o2c.copy()
     
-    def get_counts(self):
-        if self.ordered:
-            return 1
-
-        raw_o2c_counts = np.array([
-            [ len(self.raw_o2c_dict[scene].get(part, [])) for part in self.reader.parts ] for scene in self.reader.scenes.keys() 
-        ])
-        
-        prediction_counts = xr.DataArray(
-            raw_o2c_counts,
-            dims = ["scene", "part"],
-            coords={
-                "scene" : list(self.reader.scenes.keys()),
-                "part": list(self.reader.parts)
-            }
-        )
-        ismatched = ~(self.matched_o2c.isnull().any(dim=[ "transform_major", "transform_minor"]))
-
-        test_positive_counts = prediction_counts.sum("scene")
-        true_positive_counts = ismatched.sum("scene").groupby("part").sum()
-        actual_positive_counts = ismatched.count("scene").groupby("part").sum()
-
-        stats = xr.concat(
-            [true_positive_counts, test_positive_counts,  actual_positive_counts],
-            pd.Index(["true_positive", "test_positive", "actual_positive"], name="counts"),
-        ).assign_coords({"dataset": self.reader.dataset_id})
-        return stats
-
     def _match_poses(
                            self, 
                            scene:int,
@@ -190,12 +176,12 @@ class PoseMatcher:
                                part:str, 
                                poses:np.ndarray
                                ):
-        """Saves matched poses to self.prematched_o2c.
+        """Saves matched poses to self.matched_o2c.
 
         Args:
-            scene (int): _description_
-            part (str): _description_
-            poses (Union[np.ndarray, list[np.ndarray]]): _description_
+            scene (int): scene id
+            part (str): part name
+            poses (Union[np.ndarray, list[np.ndarray]]): ordered poses to save.
         """
         #find the unmatched instances
         matched_poses = self.matched_o2c.sel(scene=scene, part=part)
@@ -256,7 +242,13 @@ class PoseMatcher:
         # returns a list of pairings from raw to true instances
         return hungarian(pose_distances_masked, pose_distances_masked['pred_instance'].data, pose_distances_masked['instance'].data)
     
-    def get_stats(self):
+    def get_stats(self) -> xr.DataArray:
+        """Returns match stats for calculating precision and recall.
+        For each part will report, true positives, test positives, and actual positives.
+
+        Returns:
+            xr.DataArray: Stats about predictions and matches.
+        """
         ismatched = ~(self.matched_o2c.isnull().any(dim=[ "transform_major", "transform_minor"]))
 
         if self.ordered:
