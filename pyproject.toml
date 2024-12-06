@@ -1,0 +1,54 @@
+[project]
+name = "intrinsic-ipd"
+version = "0.1.0"
+description = "Industrial plentopic dataset and robot consistency metric published in CVPR 2024 by Intrinsic AI."
+readme = "README.md"
+
+authors = [
+    {name = "Intrinsic Innovation LLC", email = "agastyak@intrinsic.ai"},
+]
+
+requires-python = ">=3.8"
+
+dependencies = [
+    "aenum>=3.1.15",
+    "numpy>=1.24.4",
+    "opencv-python>=4.8.1.78",
+    "xarray>=2022.3.0,!=2022.6.*,!=2022.9.*,!=2022.10.*,!=2022.11.*,!=2022.12.*,!=2023.1.*,!=2023.2.*,!=2023.3.*,!=2023.4.*,!=2023.5.*,!=2023.6.*,",
+    "pandas>=2.0.3",
+    "pyrender>=0.1.45",
+    "trimesh>=4.4.7",
+    "scipy>=1.9.3",
+    "lapsolver>=1.1.0",
+    "tqdm>=4.66.5",
+]
+
+license = {text = "CC-BY-NC-SA-4.0"}
+
+[project.optional-dependencies]
+notebooks = [
+    "ipykernel>=6.29.5",
+    "matplotlib>=3.7.5",
+    "pyyaml>=6.0.2",
+]
+
+[project.scripts]
+intrinsic-ipd-cli = "intrinsic_ipd.download_cli:main"
+
+[project.urls]
+Homepage = "https://github.com/intrinsic-ai/ipd"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.dev-dependencies]
+convert2bop = [
+    # "bop-toolkit @ git+https://github.com/thodan/bop_toolkit.git@master",
+    "open3d>=0.18.0",
+    "pymeshlab>=2023.12.post2",
+    "-e file:///${PROJECT_ROOT}/bop_toolkit#egg=bop-toolkit-lib",
+]

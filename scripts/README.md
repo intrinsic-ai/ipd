@@ -1,6 +1,10 @@
 # Scripts to download and extract the dataset, cad models
 
-## Option 1: Bash Script
+## Option 1: IPDReader
+
+See `ipd/demo_reader.ipynb`. The `IPDReader` class will download and read the dataset.
+
+## Option 2: Bash Script
 
 Will download one specified dataset, and extract it. Then will download all cad models to `models` subfolder.
 
@@ -12,38 +16,42 @@ export FOLDER=./datasets
 bash scripts/dataset/get_dataset.sh $ID $CAMERA $FOLDER
 ```
 
-## Option 2: Python Script
+## Option 3: Python CLI
 
 Has options to download one or more datasets to specified folder, option to extract (will not extract by default). Then will download all cad models to `models` subfolder.
 
-- Python requirements in [`get_dataset.requirements.txt`](./get_dataset.requirements.txt).
-    ```bash
-    pip install -r scripts/dataset/get_dataset.requirements.txt
-    ```
+- Install the `intrinsic-ipd-cli`:
+    - From source:
+        1. Clone this repo
+        2. Install `pip -e .`
+    - Via pip: (not yet available!!!)
+        1. `pip install ipd`
+    
+    Should have the download cli available via `ipd-cli` command.
 
 - To download and extract all datasets:
     ```bash
-    python scripts/dataset/get_dataset.py --id ALL --camera ALL --folder ./datasets --extract
+    intrinsic-ipd-cli --id ALL --camera ALL --folder ./datasets --extract
     ```
 
 - To download and extract one dataset:
     ```bash
-    python scripts/dataset/get_dataset.py --id dataset_basket_1  --camera Basler-LR --folder ./datasets --extract
+    intrinsic-ipd-cli --id dataset_basket_1  --camera Basler-LR --folder ./datasets --extract
     ```
 
 - To download and extract all cameras for one dataset:
     ```bash
-    python scripts/dataset/get_dataset.py --id dataset_basket_1  --camera ALL --folder ./datasets --extract
+    intrinsic-ipd-cli --id dataset_basket_1  --camera ALL --folder ./datasets --extract
     ```
 
 - To download and extract all datasets for one camera:
     ```bash
-    python scripts/dataset/get_dataset.py --id ALL  --camera Basler-LR --folder ./datasets --extract
+    intrinsic-ipd-cli --id ALL  --camera Basler-LR --folder ./datasets --extract
     ```
 
-- Command line options:
+- All command line options:
     ```bash
-    ./scripts/dataset/get_dataset.py
+    intrinsic-ipd-cli -h
 
     options:
     -h, --help              show this help message and exit
