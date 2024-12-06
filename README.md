@@ -4,12 +4,25 @@
 
 ![alt text](assets/teaser.png)
 
-Accepted at CVPR 2024!
+[Paper](https://openaccess.thecvf.com/content/CVPR2024/html/Kalra_Towards_Co-Evaluation_of_Cameras_HDR_and_Algorithms_for_Industrial-Grade_6DoF_CVPR_2024_paper.html) accepted at CVPR 2024!
+
 
 # Abstract
 6DoF Pose estimation has been gaining increased importance in vision for over a decade, however it does not yet meet the reliability and accuracy standards for mass deployment in industrial robotics. To this effect, we present the Industrial Plenoptic Dataset (IPD): the first dataset and evaluation method for the co-evaluation of cameras, HDR, and algorithms targeted at reliable, high-accuracy industrial automation. Specifically, we capture 2,300 physical scenes of 22 industrial parts covering a $1m\times 1m\times 0.5m$ working volume, resulting in over 100,000 distinct object views. Each scene is captured with 13 well-calibrated multi-modal cameras including polarization and high-resolution structured light. In terms of lighting, we capture each scene at 4 exposures and in 3 challenging lighting conditions ranging from 100 lux to 100,000 lux. We also present, validate, and analyze robot consistency, an evaluation method targeted at scalable, high accuracy evaluation. We hope that vision systems that succeed on this dataset will have direct industry impact. 
 
-## This Repo
+## Bibtex
+```bibtex
+@InProceedings{Kalra_2024_CVPR,
+    author    = {Kalra, Agastya and Stoppi, Guy and Marin, Dmitrii and Taamazyan, Vage and Shandilya, Aarrushi and Agarwal, Rishav and Boykov, Anton and Chong, Tze Hao and Stark, Michael},
+    title     = {Towards Co-Evaluation of Cameras HDR and Algorithms for Industrial-Grade 6DoF Pose Estimation},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2024},
+    pages     = {22691-22701}
+}
+```
+
+# This Repo
 
 - [x] March 29th: Dataset Released!
 - [x] July 3rd: Scanned CAD [Available](Dataset.md#model-table-with-download-links)
@@ -78,11 +91,11 @@ Please see the demo notebooks for using the IPD Toolkit to download, read, rende
     </tr>
 </table>
 
-
 ## BOP compatibility (EXPERIMENTAL)
 Notebook with documentation for converting to BOP format provided in `convert_to_bop.ipynb`. You do not need to clone the `bop_toolkit` submodule unless using this script.
 
 ## Parts used
+
 We purchased all physical parts from McMaster-Carr's website. We give detailed purchase instructions [here](Parts.md)
 
 ## License
