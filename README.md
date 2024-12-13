@@ -27,8 +27,8 @@
 - [x] March 29th: Dataset Released!
 - [x] July 3rd: Scanned CAD [Available](Dataset.md#model-table-with-download-links)
 - [x] July 3rd: Code for [downloading](./scripts/dataset/README.md) and [visualization data](./render.ipynb)
-- [ ] August 15th: Code for Robot Consistency Evaluation Method
-- [ ] September 15th: Leaderboard for submitting results on test images
+- [x] August 15th: Code for Robot Consistency Evaluation Method
+- [ ] February 2025: Leaderboard for submitting results on test images
 
 ## Dataset
 ![alt text](assets/dataset.png)
@@ -96,7 +96,7 @@ Notebook with documentation for converting to BOP format provided in `convert_to
 
 ## Parts used
 
-We purchased all physical parts from McMaster-Carr's website. We give detailed purchase instructions [here](Parts.md)
+We purchased all physical parts from McMaster-Carr's website (see the links to the parts [here](Parts.md)). We provide the recreated 3D models of the parts [here](Dataset.md)
 
 ## License
 
