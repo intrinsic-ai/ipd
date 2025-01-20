@@ -1,6 +1,6 @@
 ![alt text](assets/image.png)
 
-# Industrial Plentopic Dataset
+# Industrial Plenotpic Dataset
 
 ![alt text](assets/teaser.png)
 
