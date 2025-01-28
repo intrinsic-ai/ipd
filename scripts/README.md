@@ -13,7 +13,7 @@ export ID=dataset_basket_0
 export CAMERA=Basler-LR
 export FOLDER=./datasets
 
-bash scripts/dataset/get_dataset.sh $ID $CAMERA $FOLDER
+bash scripts/get_dataset.sh $ID $CAMERA $FOLDER
 ```
 
 ## Option 3: Python CLI
@@ -23,7 +23,7 @@ Has options to download one or more datasets to specified folder, option to extr
 - Install the `intrinsic-ipd-cli`:
     - From source:
         1. Clone this repo
-        2. Install `pip -e .`
+        2. Install `pip install -e .`
     - Via pip: (not yet available!!!)
         1. `pip install ipd`
     
@@ -31,22 +31,22 @@ Has options to download one or more datasets to specified folder, option to extr
 
 - To download and extract all datasets:
     ```bash
-    intrinsic-ipd-cli --id ALL --camera ALL --folder ./datasets --extract
+    intrinsic-ipd-cli --id ALL --camera ALL --root ./datasets --extract
     ```
 
 - To download and extract one dataset:
     ```bash
-    intrinsic-ipd-cli --id dataset_basket_1  --camera Basler-LR --folder ./datasets --extract
+    intrinsic-ipd-cli --id dataset_basket_1  --camera Basler-LR --root ./datasets --extract
     ```
 
 - To download and extract all cameras for one dataset:
     ```bash
-    intrinsic-ipd-cli --id dataset_basket_1  --camera ALL --folder ./datasets --extract
+    intrinsic-ipd-cli --id dataset_basket_1  --camera ALL --root ./datasets --extract
     ```
 
 - To download and extract all datasets for one camera:
     ```bash
-    intrinsic-ipd-cli --id ALL  --camera Basler-LR --folder ./datasets --extract
+    intrinsic-ipd-cli --id ALL  --camera Basler-LR --root ./datasets --extract
     ```
 
 - All command line options:
@@ -59,6 +59,6 @@ Has options to download one or more datasets to specified folder, option to extr
                             Supply a camera id or or 'ALL' to download all cameras for the specified dataset
     --id                        {ALL, dataset_basket_0, dataset_basket_1,..., dataset_texturedbg_3}
                             Supply a dataset id or 'ALL' to download all datasets for specified camera
-    --folder FOLDER         Folder to download/extract the datasets to
+    --root FOLDER           Folder to download/extract the datasets to
     --extract               Flag to extract the downloaded dataset(s)
     ```

@@ -26,10 +26,10 @@ def main():
         for dataset in selected_datasets:
             zip_path = download_dataset(dataset, camera, args.root)
             if args.extract and zip_path:
-                extract(zip_path)
+                extract(zip_path, args.root)
     
     #download the cad_models
-    print(f"Downloading cad models to {args.folder}/models")
+    print(f"Downloading cad models to {args.root}/models")
     download_cads(args.root)
     
 if __name__ == "__main__":

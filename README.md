@@ -26,7 +26,7 @@
 
 - [x] March 29th: Dataset Released!
 - [x] July 3rd: Scanned CAD [Available](Dataset.md#model-table-with-download-links)
-- [x] July 3rd: Code for [downloading](./scripts/dataset/README.md) and [visualization data](./render.ipynb)
+- [x] July 3rd: Code for [downloading](./scripts/README.md) and [visualization data](./demo_render.ipynb)
 - [x] August 15th: Code for Robot Consistency Evaluation Method
 - [ ] February 2025: Leaderboard for submitting results on test images
 
@@ -35,7 +35,7 @@
 
 In the repo you can find the evaluation dataset as well as links to relevant cad models
 
-Please use our scripts to download/extract datasets and cad models in [scripts/dataset](./scripts/dataset/README.md)
+Please use our scripts to download/extract datasets and cad models in [scripts/](./scripts/README.md)
 
 Dataset and CAD model descriptions along with download links are available [here](Dataset.md)
 
